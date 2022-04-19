@@ -1,9 +1,12 @@
 import classes from './ProfileForm.module.css';
 import { useRef, useContext } from 'react';
 import AuthContext from '../../context/auth-context';
+import { useHistory } from 'react-router-dom';
 const ProfileForm = () => {
   const newPasswordInputRef = useRef();
   const authCtx = useContext(AuthContext);
+
+  const history = useHistory();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ const ProfileForm = () => {
           throw new Error(res.statusText);
         }
         res.json().then((data) => console.log(data));
+        history.replace('/');
         console.log('new password setted success ', res);
       })
       .catch((err) => console.log(err.message));
